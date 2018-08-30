@@ -4,11 +4,6 @@ volumes:
   es-data:
   es-logs:
 
-networks:
-  feesy:
-    external: true
-  feesy-elk:
-
 services:
   elasticsearch:
     container_name: elasticsearch
@@ -30,9 +25,7 @@ services:
     volumes:
       - es-data:/usr/share/elasticsearch/data
       - es-logs:/usr/share/elasticsearch/logs
-    networks:
-      - feesy
-      - feesy-elk
+    network_mode: bridge
 
   kibana:
     container_name: kibana
@@ -42,9 +35,7 @@ services:
       - 5601:5601
     links:
       - elasticsearch
-    networks:
-      - feesy
-      - feesy-elk
+    network_mode: bridge
 
 #  logstash:
 #    container_name: logstash
